@@ -35,10 +35,9 @@ public abstract class Food {
         this.desc = desc;
     }
 
-    ;
 
     public Food() {
     }
 
-    ;
+
 }

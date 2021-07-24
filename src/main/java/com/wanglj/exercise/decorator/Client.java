@@ -13,6 +13,8 @@ public class Client {
 
         food = new Egg(food);
         System.out.println(food.getDesc() + "  " + food.cost() + "元");
+
+
         food = new Bacon(food);
         System.out.println(food.getDesc() + "  " + food.cost() + "元");
 
