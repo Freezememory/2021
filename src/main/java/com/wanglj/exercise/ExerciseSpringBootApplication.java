@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ExerciseSpringBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ExerciseSpringBootApplication.class, args);
 
+        SpringApplication.run(ExerciseSpringBootApplication.class, args);
 
     }
 }
