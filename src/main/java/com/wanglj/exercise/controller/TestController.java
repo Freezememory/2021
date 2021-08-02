@@ -1,5 +1,7 @@
 package com.wanglj.exercise.controller;
 
+import com.wanglj.exercise.aop.service.AopTestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TestController {
+    @Autowired
+    private AopTestService aopTestService;
 
 
     @RequestMapping(value = "/test")
@@ -17,5 +21,10 @@ public class TestController {
         String a = "hello  springBoot!!!!";
         System.out.println("springboot 启动！");
         return a;
+    }
+
+    @RequestMapping(value = "/aopTest")
+    public String aopTest() {
+        return aopTestService.testAop("wanglj", 23);
     }
 }
