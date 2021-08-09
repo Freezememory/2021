@@ -3,6 +3,7 @@ package com.wanglj.exercise.controller;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.wanglj.exercise.crawler.CloudMusicCrawler;
 import com.wanglj.exercise.crawler.KuWoCrawler;
 import com.wanglj.exercise.crawler.QQCrawler;
 import com.wanglj.exercise.entity.MusicCrawlerExcel;
@@ -31,7 +32,9 @@ public class CrawlerController {
 
     private final KuWoCrawler kuWoCrawler;
 
-    private final QQCrawler crawler;
+    private final QQCrawler qqCrawler;
+
+    private final CloudMusicCrawler cloudMusicCrawler;
 
     @GetMapping("/exportKuWoMusicCrawlerInfo")
     public void exportKuWoMusicCrawlerInfo(@RequestParam(value = "s") String s) {
@@ -60,7 +63,8 @@ public class CrawlerController {
     @GetMapping("/exportQQSingerInfo")
     public void exportQQSingerInfo(@RequestParam(value = "s") String s) {
         try {
-            Map<String, List<MusicCrawlerExcel>> map = crawler.getQqSingerInfo();
+            Map<String, List<MusicCrawlerExcel>> map = qqCrawler.getQqSingerInfo();
+            List<MusicCrawlerExcel> mvList = qqCrawler.getQQMvInfo();
             List<MusicCrawlerExcel> manList = map.get("man");
             List<MusicCrawlerExcel> womanList = map.get("woman");
             // 输出流
@@ -69,12 +73,33 @@ public class CrawlerController {
             ExcelWriter excelWriter = EasyExcel.write(outputStream).build();
             WriteSheet test1 = EasyExcel.writerSheet(0, "qq男华语歌手榜").head(MusicCrawlerExcel.class).build();
             WriteSheet test2 = EasyExcel.writerSheet(1, "qq女华语歌手榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test3 = EasyExcel.writerSheet(2, "qqMV榜").head(MusicCrawlerExcel.class).build();
+            excelWriter.write(manList, test1).write(womanList, test2).write(mvList, test3);
+            excelWriter.finish();
+        } catch (Exception e) {
+            log.error("导出异常：", e);
+        }
+    }
+
+    @GetMapping("/exportCloudSingerInfo")
+    public void exportCloudSingerInfo(@RequestParam(value = "s") String s) {
+        try {
+            Map<String, List<MusicCrawlerExcel>> map = cloudMusicCrawler.searchSong();
+            List<MusicCrawlerExcel> manList = map.get("man");
+            List<MusicCrawlerExcel> womanList = map.get("woman");
+            // 输出流
+            OutputStream outputStream = null;
+            outputStream = new FileOutputStream(new File("D:/CloudSinger.xlsx"));
+            ExcelWriter excelWriter = EasyExcel.write(outputStream).build();
+            WriteSheet test1 = EasyExcel.writerSheet(0, "网易云华语男歌手榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test2 = EasyExcel.writerSheet(1, "网易云华语女歌手榜").head(MusicCrawlerExcel.class).build();
             excelWriter.write(manList, test1).write(womanList, test2);
             excelWriter.finish();
         } catch (Exception e) {
             log.error("导出异常：", e);
         }
     }
+
 
 
 }
