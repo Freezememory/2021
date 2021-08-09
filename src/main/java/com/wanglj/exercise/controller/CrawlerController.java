@@ -6,7 +6,6 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.wanglj.exercise.crawler.KuWoCrawler;
 import com.wanglj.exercise.crawler.QQCrawler;
 import com.wanglj.exercise.entity.MusicCrawlerExcel;
-import com.wanglj.exercise.utils.ExcelUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Wanglj
@@ -41,22 +41,15 @@ public class CrawlerController {
             List<MusicCrawlerExcel> womanSingerInfoList = kuWoCrawler.getWomanSingerInfo();
             List<MusicCrawlerExcel> manSingerInfoList = kuWoCrawler.getManSingerInfo();
             List<MusicCrawlerExcel> mvInfoList = kuWoCrawler.getMvInfo();
-            //ExcelUtil.exportExcel("酷我音乐榜", "sheet1", MusicCrawlerExcel.class, list);
-//            ExcelUtil.exportExcel("酷我音乐榜", "sheet2", MusicCrawlerExcel.class, HotList);
-//            ExcelUtil.exportExcel("酷我音乐榜", "sheet3", MusicCrawlerExcel.class, womanSingerInfoList);
-//            ExcelUtil.exportExcel("酷我音乐榜", "sheet4", MusicCrawlerExcel.class, manSingerInfoList);
-//            ExcelUtil.exportExcel("酷我音乐榜", "sheet5", MusicCrawlerExcel.class, mvInfoList);
-
-            // 测试多sheel导出
-            // 输出流
-            OutputStream outputStream = null;
-            outputStream = new FileOutputStream(new File("D:/1.xlsx"));
+            // 多sheel导出
+            OutputStream outputStream = null;// 输出流
+            outputStream = new FileOutputStream(new File("D:/KuWoMusic.xlsx"));
             ExcelWriter excelWriter = EasyExcel.write(outputStream).build();
-            WriteSheet test1 = EasyExcel.writerSheet(0, "test1").head(MusicCrawlerExcel.class).build();
-            WriteSheet test2 = EasyExcel.writerSheet(1, "test2").head(MusicCrawlerExcel.class).build();
-            WriteSheet test3 = EasyExcel.writerSheet(2, "test3").head(MusicCrawlerExcel.class).build();
-            WriteSheet test4 = EasyExcel.writerSheet(3, "test4").head(MusicCrawlerExcel.class).build();
-            WriteSheet test5 = EasyExcel.writerSheet(4, "test5").head(MusicCrawlerExcel.class).build();
+            WriteSheet test1 = EasyExcel.writerSheet(0, "酷我新歌榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test2 = EasyExcel.writerSheet(1, "酷我热歌榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test3 = EasyExcel.writerSheet(2, "酷我女华语歌手榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test4 = EasyExcel.writerSheet(3, "酷我男华语歌手榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test5 = EasyExcel.writerSheet(4, "酷我mv华语榜").head(MusicCrawlerExcel.class).build();
             excelWriter.write(list, test1).write(HotList, test2).write(womanSingerInfoList, test3).write(manSingerInfoList, test4).write(mvInfoList, test5);
             excelWriter.finish();
         } catch (Exception e) {
@@ -67,8 +60,17 @@ public class CrawlerController {
     @GetMapping("/exportQQSingerInfo")
     public void exportQQSingerInfo(@RequestParam(value = "s") String s) {
         try {
-            List<MusicCrawlerExcel> list = crawler.getQqSingerInfo();
-            ExcelUtil.exportExcel("qq音乐歌手信息", null, MusicCrawlerExcel.class, list);
+            Map<String, List<MusicCrawlerExcel>> map = crawler.getQqSingerInfo();
+            List<MusicCrawlerExcel> manList = map.get("man");
+            List<MusicCrawlerExcel> womanList = map.get("woman");
+            // 输出流
+            OutputStream outputStream = null;
+            outputStream = new FileOutputStream(new File("D:/QQSinger.xlsx"));
+            ExcelWriter excelWriter = EasyExcel.write(outputStream).build();
+            WriteSheet test1 = EasyExcel.writerSheet(0, "qq男华语歌手榜").head(MusicCrawlerExcel.class).build();
+            WriteSheet test2 = EasyExcel.writerSheet(1, "qq女华语歌手榜").head(MusicCrawlerExcel.class).build();
+            excelWriter.write(manList, test1).write(womanList, test2);
+            excelWriter.finish();
         } catch (Exception e) {
             log.error("导出异常：", e);
         }

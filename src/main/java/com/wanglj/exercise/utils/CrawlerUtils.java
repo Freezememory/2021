@@ -82,7 +82,7 @@ public class CrawlerUtils {
         try {
             HttpGet httpget = new HttpGet(url);
             RequestConfig requestConfig = RequestConfig.custom()
-                    .setSocketTimeout(5000)
+                    .setSocketTimeout(50000)
                     .setConnectTimeout(50000)
                     .setConnectionRequestTimeout(50000)
                     .build();

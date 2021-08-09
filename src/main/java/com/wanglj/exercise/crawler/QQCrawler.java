@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Wanglj
@@ -37,8 +39,10 @@ public class QQCrawler {
         //qqCrawler.getQqSingerInfo();
     }
 
-    public List<MusicCrawlerExcel> getQqSingerInfo() throws IOException {
+    public Map<String, List<MusicCrawlerExcel>> getQqSingerInfo() throws IOException {
+        Map<String, List<MusicCrawlerExcel>> map = new HashMap<String, List<MusicCrawlerExcel>>();
         List<MusicCrawlerExcel> excelList = new ArrayList<MusicCrawlerExcel>();
+        List<MusicCrawlerExcel> womenExcelList = new ArrayList<MusicCrawlerExcel>();
         int size = 80;
         for (int a = 0; a < 2; a++) {
             Document document = Jsoup.connect(StrUtil.format(womanSingerUrl, a, 0, 1)).get();
@@ -65,16 +69,18 @@ public class QQCrawler {
                     MusicCrawlerExcel excel = new MusicCrawlerExcel();
                     JSONObject object = jsonArray.getJSONObject(j);
                     String name = object.getString("singer_name");
+                    excel.setSongName(name);
                     if (a == 0) {
-                        excel.setSongName(name);
+                        excelList.add(excel);
                     } else {
-                        excel.setAlbumName(name);
+                        womenExcelList.add(excel);
                     }
-                    excelList.add(excel);
                     log.info("页数：{} ,{}歌手(0-男，1-女)， 歌手名称：{}", i, a, name);
                 }
             }
         }
-        return excelList;
+        map.put("man", excelList);
+        map.put("woman", womenExcelList);
+        return map;
     }
 }

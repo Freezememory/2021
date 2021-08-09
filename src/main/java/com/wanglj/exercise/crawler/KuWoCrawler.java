@@ -22,28 +22,27 @@ public class KuWoCrawler {
 
     private static final String newSongUrl = "http://www.kuwo.cn/api/www/bang/bang/musicList?bangId=17&pn={}&rn={}&httpsStatus=1";
     private static final String hotSongUrl = "http://www.kuwo.cn/api/www/bang/bang/musicList?bangId=16&pn={}&rn={}&httpsStatus=1";
-    private static final String womenSingerUrl = "http://www.kuwo.cn/api/www/artist/artistInfo?category=2&prefix=&pn={}&rn={}&httpsStatus=1&reqId=e7a27ef0-f668-11eb-9143-b9cc9fe59635";
-    private static final String manSingerUrl = "http://www.kuwo.cn/api/www/artist/artistInfo?category=1&prefix=&pn={}=&rn={}&httpsStatus=1";
-    private static final String mvUrl = "http://www.kuwo.cn/api/www/music/mvList?pid=236682871&pn={}&rn={}&httpsStatus=1";
-
-    //http://www.kuwo.cn/api/www/music/mvList?pid=236682871&pn=1&rn=30&httpsStatus=1&reqId=abd100a0-f680-11eb-9143-b9cc9fe59635
+    //private static final String womenSingerUrl = "http://www.kuwo.cn/api/www/artist/artistInfo?category=2&prefix=&pn={}&rn={}&httpsStatus=1";
+    private static final String womenSingerUrl = "http://www.kuwo.cn/api/www/artist/artistInfo?category=2&prefix=&pn={}&rn={}&httpsStatus=1&reqId=18482220-f8bd-11eb-981a-3d19a68a03f7";
+    private static final String manSingerUrl = "http://www.kuwo.cn/api/www/artist/artistInfo?category=1&prefix=&pn={}&rn={}&httpsStatus=1&reqId=00483920-f8be-11eb-981a-3d19a68a03f7";
+    //private static final String mvUrl = "http://www.kuwo.cn/api/www/music/mvList?pid=236682871&pn={}&rn={}&httpsStatus=1";
+    private static final String mvUrl = "http://www.kuwo.cn/api/www/music/mvList?pid=236682731&pn={}&rn={}&httpsStatus=1";
 
     private static final Integer songSize = 30;
-    private static final Integer singerSize = 102;
+    private static final Integer singerSize = 50;
 
     public static void main(String[] args) throws IOException {
         //String document = CrawlerUtils.connect(StrUtil.format(womenSingerUrl,8,102), "utf-8");
         //System.out.println(document);
         KuWoCrawler kuWoCrawler = new KuWoCrawler();
         // kuWoCrawler.getNewSongInfo();
-        //kuWoCrawler.getHotSongInfo();
-        // kuWoCrawler.getWomanSingerInfo();
-        //kuWoCrawler.getManSingerInfo();
+        // kuWoCrawler.getHotSongInfo();
+        //kuWoCrawler.getWomanSingerInfo();
+        kuWoCrawler.getManSingerInfo();
         // kuWoCrawler.getMvInfo();
     }
 
     public List<MusicCrawlerExcel> getNewSongInfo() {
-
         List<MusicCrawlerExcel> list = new ArrayList<MusicCrawlerExcel>();
         try {
             String document = CrawlerUtils.connect(StrUtil.format(newSongUrl, 2, songSize), "utf-8");
@@ -71,7 +70,7 @@ public class KuWoCrawler {
                 }
             }
         } catch (Exception e) {
-            log.error("抓取信息异常：", e);
+            log.error("抓取酷我新歌榜信息异常：", e);
         }
         return list;
     }
@@ -103,16 +102,15 @@ public class KuWoCrawler {
                 }
             }
         } catch (Exception e) {
-            log.error("抓取信息异常：", e);
+            log.error("抓取酷我热歌榜信息异常：", e);
         }
-
         return list;
     }
 
     public List<MusicCrawlerExcel> getWomanSingerInfo() throws IOException {
         List<MusicCrawlerExcel> list = new ArrayList<MusicCrawlerExcel>();
         try {
-            String document = CrawlerUtils.connect(StrUtil.format(womenSingerUrl, 2, singerSize), "utf-8");
+            String document = CrawlerUtils.connect(StrUtil.format(womenSingerUrl, 1, singerSize), "utf-8");
             JSONObject jsonObject = JSONObject.parseObject(document);
             Integer total = jsonObject.getJSONObject("data").getInteger("total");
             int page = total / singerSize;
@@ -133,15 +131,17 @@ public class KuWoCrawler {
                 }
             }
         } catch (Exception e) {
-            log.error("抓取信息异常：", e);
+            log.error("抓取酷我女歌手信息异常：", e);
         }
         return list;
     }
 
-    public List<MusicCrawlerExcel> getManSingerInfo() throws IOException {
+    public List<MusicCrawlerExcel> getManSingerInfo() {
         List<MusicCrawlerExcel> list = new ArrayList<MusicCrawlerExcel>();
+        String pageDocument = null;
         try {
-            String document = CrawlerUtils.connect(StrUtil.format(manSingerUrl, 2, singerSize), "utf-8");
+            String document = CrawlerUtils.connect(StrUtil.format(manSingerUrl, 1, singerSize), "utf-8");
+            //String document = CrawlerUtils.sendGet(StrUtil.format(manSingerUrl, 2, singerSize));
             JSONObject jsonObject = JSONObject.parseObject(document);
             Integer total = jsonObject.getJSONObject("data").getInteger("total");
             int page = total / singerSize;
@@ -149,22 +149,22 @@ public class KuWoCrawler {
                 page += 1;
             }
             for (int i = 1; i <= page; i++) {
-                String pageDocument = CrawlerUtils.connect(StrUtil.format(manSingerUrl, i, singerSize), "utf-8");
+                pageDocument = CrawlerUtils.connect(StrUtil.format(manSingerUrl, i, singerSize), "utf-8");
+                //String pageDocument = CrawlerUtils.sendGet(StrUtil.format(manSingerUrl, 2, singerSize));
                 JSONObject pageJsonObject = JSONObject.parseObject(pageDocument);
                 JSONArray array = pageJsonObject.getJSONObject("data").getJSONArray("artistList");
                 for (int j = 0; j < array.size(); j++) {
                     MusicCrawlerExcel excel = new MusicCrawlerExcel();
                     JSONObject object = array.getJSONObject(j);
                     String singerName = object.getString("name");
-                    //String singerName = object.getString("artist");
                     log.info("男：歌手名：{}", singerName);
-                    // excel.setSongName(songName);
                     excel.setSingerName(singerName);
                     list.add(excel);
                 }
             }
         } catch (Exception e) {
-            log.error("抓取信息异常：", e);
+            log.error("抓取酷我男歌手信息异常：", e);
+            log.info("信息：{}", pageDocument);
         }
         return list;
     }
@@ -175,8 +175,8 @@ public class KuWoCrawler {
             String document = CrawlerUtils.connect(StrUtil.format(mvUrl, 1, songSize), "utf-8");
             JSONObject jsonObject = JSONObject.parseObject(document);
             Integer total = jsonObject.getJSONObject("data").getInteger("total");
-            int page = total / singerSize;
-            if (total % singerSize > 0) {
+            int page = total / songSize;
+            if (total % songSize > 0) {
                 page += 1;
             }
             for (int i = 1; i <= page; i++) {
@@ -197,7 +197,7 @@ public class KuWoCrawler {
                 }
             }
         } catch (Exception e) {
-            log.error("抓取信息异常：", e);
+            log.error("抓取酷我MV信息异常：", e);
         }
         return list;
     }
