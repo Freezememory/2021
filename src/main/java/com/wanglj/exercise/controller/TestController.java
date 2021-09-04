@@ -1,9 +1,12 @@
 package com.wanglj.exercise.controller;
 
 import com.wanglj.exercise.aop.service.AopTestService;
+import com.wanglj.exercise.aop.service.TestReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Wanglj
@@ -25,6 +28,9 @@ public class TestController {
 
     @RequestMapping(value = "/aopTest")
     public String aopTest() {
-        return aopTestService.testAop("wanglj", 23);
+        TestReq testReq = new TestReq();
+        testReq.setDateTime(LocalDateTime.now());
+        testReq.setName("test");
+        return aopTestService.testAop(testReq, 23);
     }
 }

@@ -1,11 +1,14 @@
 package com.wanglj.exercise;
 
 import com.wanglj.exercise.aop.service.AopTestService;
+import com.wanglj.exercise.aop.service.TestReq;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Wanglj
@@ -20,6 +23,10 @@ public class TestExerciseApplication {
 
     @Test
     public void aopTest() {
-        aopTestService.testAop("wanglj", 23);
+        TestReq testReq = new TestReq();
+        testReq.setDateTime(LocalDateTime.now());
+        testReq.setName("test");
+        aopTestService.testAop(testReq, 23);
+        //aopTestService.testAop("wanglj", 23);
     }
 }
