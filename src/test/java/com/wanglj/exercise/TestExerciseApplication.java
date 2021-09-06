@@ -25,7 +25,7 @@ public class TestExerciseApplication {
     public void aopTest() {
         TestReq testReq = new TestReq();
         testReq.setDateTime(LocalDateTime.now());
-        testReq.setName("test");
+        // testReq.setName("test");
         aopTestService.testAop(testReq, 23);
         //aopTestService.testAop("wanglj", 23);
     }

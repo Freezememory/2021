@@ -14,4 +14,14 @@ public class TestReq {
     private LocalDateTime dateTime;
 
     private String name;
+
+    public String getName() {
+        return "有点意思";
+    }
+
+    public static void main(String[] args) {
+        TestReq req = new TestReq();
+        req.setDateTime(LocalDateTime.now());
+        System.out.println(req.toString());
+    }
 }

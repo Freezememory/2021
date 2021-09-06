@@ -30,7 +30,7 @@ public class TestController {
     public String aopTest() {
         TestReq testReq = new TestReq();
         testReq.setDateTime(LocalDateTime.now());
-        testReq.setName("test");
+        //testReq.setName("test");
         return aopTestService.testAop(testReq, 23);
     }
 }
