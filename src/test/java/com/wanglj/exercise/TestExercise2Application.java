@@ -30,7 +30,7 @@ public class TestExercise2Application {
     public void exceptionTest() {
         ArithmeticException exception = Assertions.assertThrows(
                 //扔出断言异常
-                ArithmeticException.class, () -> System.out.println(1 % 0));
+                ArithmeticException.class, () -> System.out.println(1 % 1));
 
     }
 
