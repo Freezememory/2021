@@ -12,6 +12,13 @@ import org.springframework.stereotype.Service;
 public class AopTestService {
 
 
+    /**
+     * @return java.lang.String
+     * @Author Wanglj
+     * @Description
+     * @Date 2021/9/8 11:18
+     * @Param [req, age]
+     **/
     public String testAop(TestReq req, Integer age) {
         log.info("名字： {}", req.getName());
         log.info("年龄： {}", age);

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +32,16 @@ public class TestExercise2Application {
         ArithmeticException exception = Assertions.assertThrows(
                 //扔出断言异常
                 ArithmeticException.class, () -> System.out.println(1 % 1));
+
+    }
+
+    @Test
+    @DisplayName("异常测试")
+    void streamTest() {
+        //ArrayList<Object> objects = new ArrayList<>();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(1);
+        objects.forEach(System.out::println);
 
     }
 
