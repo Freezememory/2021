@@ -21,7 +21,7 @@ public class TestExerciseApplication {
     @Autowired
     private AopTestService aopTestService;
 
-    @Test
+    @Test()
     public void aopTest() {
         TestReq testReq = new TestReq();
         testReq.setDateTime(LocalDateTime.now());

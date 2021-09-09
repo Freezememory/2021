@@ -1,5 +1,6 @@
 package com.wanglj.exercise.aop.service;
 
+import com.wanglj.exercise.aop.aspect.AopTest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,11 @@ public class AopTestService {
      * @Description
      * @Date 2021/9/8
      */
+    @AopTest(method = "test")
     public String testAop(TestReq req, Integer age) {
         log.info("名字： {}", req.getName());
         log.info("年龄： {}", age);
         return req.getName() + "::" + age;
     }
+
 }
