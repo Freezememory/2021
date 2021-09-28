@@ -1,5 +1,6 @@
 package com.wanglj.exercise;
 
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,8 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ExerciseSpringBootApplication {
 
     public static void main(String[] args) {
+        SpringApplication springApplication = new SpringApplication(ExerciseSpringBootApplication.class);
+        springApplication.setBannerMode(Banner.Mode.CONSOLE);
+        springApplication.run(args);
 
-        SpringApplication.run(ExerciseSpringBootApplication.class, args);
+//        SpringApplication.run(ExerciseSpringBootApplication.class, args);
+
 
     }
 }
