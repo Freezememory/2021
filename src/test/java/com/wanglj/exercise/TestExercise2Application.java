@@ -1,10 +1,16 @@
 package com.wanglj.exercise;
 
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runners.MethodSorters;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -18,11 +24,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
-/*
+
 @SpringBootTest(classes = {ExerciseSpringBootApplication.class})
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)*/
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestExercise2Application {
 
