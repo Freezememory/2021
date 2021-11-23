@@ -1,7 +1,6 @@
 package com.wanglj.exercise.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -21,7 +20,7 @@ public class ListService {
         service.listTest();
     }*/
 
-    @Scheduled(cron = "0/1 * * * * ?")
+    // @Scheduled(cron = "0/1 * * * * ?")
     public void listTest() {
         List<String> list = new LinkedList<>();
         list.add("1234");
@@ -34,5 +33,10 @@ public class ListService {
         for (String s : list) {
             log.info("测试后：{}", s);
         }
+        log.error("错误信息：{error}");
+    }
+
+    public void test() {
+        System.out.println("11111");
     }
 }
