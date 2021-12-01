@@ -1,6 +1,7 @@
 package com.wanglj.exercise;
 
 
+import org.jasypt.encryption.StringEncryptor;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -31,6 +33,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestExercise2Application {
+
+    @Autowired
+    private StringEncryptor encryptor;
 
     @Test
     @DisplayName("异常测试")
@@ -188,6 +193,18 @@ public class TestExercise2Application {
                 System.out.println("第三层-内嵌单元测试");
             }
         }
+    }
+
+
+    @Test
+    void testJasypt() {
+//        String password = "123456";
+        String password = "Tydic#0831";
+        String encryptPwd = encryptor.encrypt(password);
+        System.out.println("加密:：" + encryptPwd);
+        String d = "BPyYxVoG2Dd7s2yec1SR/JWbTR430/PCzxQ3e2qdc0ShXbNAxQKU1ED6TSx1CMJ0";
+//        System.out.println("解密：" + encryptor.decrypt(d));
+
     }
 
 }

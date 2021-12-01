@@ -7,7 +7,7 @@
     <groupId>com.wanglj.exercise</groupId>
     <artifactId>design2021</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <!--    <packaging>pom</packaging>-->
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -53,11 +53,6 @@
             <artifactId>spring-kafka</artifactId>
             <version>2.6.5</version>
         </dependency>
-        <!--        <dependency>
-                    <groupId>org.mybatis.spring.boot</groupId>
-                    <artifactId>mybatis-spring-boot-starter</artifactId>
-                    <version>1.1.1</version>
-                </dependency>-->
         <!--Spring aop支持:面向切面编程-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -97,6 +92,11 @@
             <version>4.5.13</version>
         </dependency>
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.12.1</version>
@@ -128,6 +128,15 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
             <version>2.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->

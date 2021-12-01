@@ -1,0 +1,23 @@
+server:
+  port: 10110
+jasypt:
+  encryptor:
+    password: pig
+spring:
+  application:
+    name: design2021
+  main:
+    banner-mode: log
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    #    password: wanglj19980401
+    password: ENC(+9xVMPGpzvZP9Z+itxet/MRQ0A4rOTp2NP5s0HDNXhninwJX69zoG9cq9yY8pKiR)
+    url: jdbc:mysql://127.0.0.1:3306/springboot
+logging:
+  level.com.gargoylesoftware.htmlunit: off
+#spring.cloud.nacos.config.namespace=7b6fc186-30f0-49e7-9a9e-08ff21def712
+  level.com.wanglj.exercise: info
+
+#jasypt.encryptor.algorithm=PBEWithMD5AndDES
+#jasypt.encryptor.iv-generator-classname=org.jasypt.iv.NoIvGenerator
