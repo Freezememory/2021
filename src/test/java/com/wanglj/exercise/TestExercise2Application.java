@@ -1,3 +1,4 @@
+/*
 package com.wanglj.exercise;
 
 
@@ -20,10 +21,12 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+*/
 /**
  * @author Wanglj
  * @date 2021/8/2 23:28
- */
+ *//*
+
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
 
@@ -31,7 +34,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
 public class TestExercise2Application {
 
     @Autowired
@@ -101,6 +103,7 @@ public class TestExercise2Application {
         return Stream.of("apple", "banana");
     }
 
+*/
 /*    @BeforeEach
     @DisplayName("每条用例开始时执行")
     void start() {
@@ -111,8 +114,10 @@ public class TestExercise2Application {
     @DisplayName("每条用例结束时执行")
     void end() {
         System.out.println("----end-----");
-    }*/
+    }*//*
 
+
+ */
 /*    @BeforeAll
     @DisplayName("每条用例开始时执行")
     static void startAll() {
@@ -123,7 +128,8 @@ public class TestExercise2Application {
     @DisplayName("每条用例结束时执行")
     static void endAll() {
         System.out.println("----endAll-----");
-    }*/
+    }*//*
+
 
     @Test
     @DisplayName("描述测试用例╯°□°）╯")
@@ -131,11 +137,13 @@ public class TestExercise2Application {
 
     }
 
+*/
 /*    @Test
     @Disabled("这条用例暂时跑不过，忽略!")
     void myFailTest(){
         assertEquals(1,2);
-    }*/
+    }*//*
+
 
     @Test
     @DisplayName("运行一组断言")
@@ -208,3 +216,4 @@ public class TestExercise2Application {
     }
 
 }
+*/
