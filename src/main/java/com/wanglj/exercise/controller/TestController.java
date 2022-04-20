@@ -3,14 +3,14 @@ package com.wanglj.exercise.controller;
 import com.alibaba.excel.EasyExcel;
 import com.wanglj.exercise.aop.service.AopTestService;
 import com.wanglj.exercise.aop.service.TestReq;
+import com.wanglj.exercise.entity.User;
 import com.wanglj.exercise.excel.DeviceExcel;
 import com.wanglj.exercise.excel.DeviceListenerExcel;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,7 +25,9 @@ import java.util.stream.Collectors;
  * @date 2021/7/21 16:11
  * 测试controller
  */
+@Api(value = "测试controller")
 @RestController
+@RequestMapping("/test")
 public class TestController {
     @Autowired
     private AopTestService aopTestService;
@@ -67,5 +69,16 @@ public class TestController {
         return "success";
     }
 
+    @ApiOperation(value = "测试", notes = "test")
+    @PostMapping("/{userId}")
+    public String removeById(@PathVariable String userId) {
+        return userId;
+    }
+
+    @ApiOperation(value = "测试", notes = "test")
+    @PostMapping
+    public String post(@RequestBody User user) {
+        return user.toString();
+    }
 
 }
