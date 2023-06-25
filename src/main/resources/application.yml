@@ -1,5 +1,8 @@
 server:
   port: 8080
+#spring:
+#
+#  profiles: test
 jasypt:
   encryptor:
     password: pig
@@ -16,11 +19,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/springboot
   boot:
     admin.client.url: http://localhost:8081
-logging:
-  level.com.gargoylesoftware.htmlunit: off
-#spring.cloud.nacos.config.namespace=7b6fc186-30f0-49e7-9a9e-08ff21def712
-  level.com.wanglj.exercise: info
+#logging:
+#  level.com.gargoylesoftware.htmlunit: off
+#  #spring.cloud.nacos.config.namespace=7b6fc186-30f0-49e7-9a9e-08ff21def712
+#  level.com.wanglj.exercise: info
 
 #jasypt.encryptor.algorithm=PBEWithMD5AndDES
 #jasypt.encryptor.iv-generator-classname=org.jasypt.iv.NoIvGenerator
-

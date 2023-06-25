@@ -43,6 +43,7 @@ public class CodeGenerateUtil {
             bindingMap.put("module", info.getModules()[i]);
             bindingMap.put("MODULE", info.getModules()[i].toUpperCase());
             bindingMap.put("eo", StrUtil.lowerFirst(entityClass.getSimpleName()));
+            bindingMap.put("namespace", entityClass.getName());
             bindingMap.put("Eo", entityClass.getSimpleName());
             bindingMap.put("comment", getComment(entityClass));
             bindingMap.put("columns", getColumns(entityClass));
@@ -82,15 +83,20 @@ public class CodeGenerateUtil {
     private static List<Field> getFields(Class entityClass) {
         TableInfo tableInfo = TableInfoHelper.initTableInfo(null, entityClass);
         List<TableFieldInfo> allFieldList = tableInfo.getFieldList();
-        List<String> superProperties = TableInfoHelper.initTableInfo(null, entityClass.getSuperclass())
-                .getFieldList()
-                .stream()
-                .map(x -> x.getProperty())
-                .collect(Collectors.toList());
+        List<String> superProperties = new ArrayList<>();
+        if (entityClass.getSuperclass() != null) {
+            superProperties = TableInfoHelper.initTableInfo(null, entityClass.getSuperclass())
+                    .getFieldList()
+                    .stream()
+                    .map(x -> x.getProperty())
+                    .collect(Collectors.toList());
+        }
+        List<String> finalSuperProperties = superProperties;
         return allFieldList.stream()
-                .filter(x -> !superProperties.contains(x.getProperty()))
+                .filter(x -> !finalSuperProperties.contains(x.getProperty()))
                 .map(x -> getField(x))
                 .collect(Collectors.toList());
+
     }
 
     private static Field getField(TableFieldInfo tableFieldInfo) {

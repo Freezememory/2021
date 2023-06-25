@@ -39,7 +39,7 @@ public class TestExerciseApplication {
     @Test
     public void testJasypt() {
 //        String password = "Tydic#0831";
-        String password = "wanglj19980401";
+        String password = "Wlj#2022";
         String encryptPwd = encryptor.encrypt(password);
         log.info("加密: {}", encryptPwd);
 //        String d = "BPyYxVoG2Dd7s2yec1SR/JWbTR430/PCzxQ3e2qdc0ShXbNAxQKU1ED6TSx1CMJ0";

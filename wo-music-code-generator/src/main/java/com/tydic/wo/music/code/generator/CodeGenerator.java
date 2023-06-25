@@ -1,9 +1,6 @@
 package com.tydic.wo.music.code.generator;
 
 import com.tydic.wo.music.core.util.ValidUtil;
-import com.wanglj.exercise.entity.TerminalLog;
-import com.wanglj.exercise.entity.UserLog;
-import com.wanglj.exercise.entity.UserOperationLog;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +16,9 @@ public class CodeGenerator {
                 .author("Wanglj")
                 .service("业务")
                 .templatePath(mysqlEntityPath)
-                .entityClasses(new Class[]{TerminalLog.class, UserLog.class, UserOperationLog.class})
-                .modules(new String[]{"TerminalLog", "UserLog", "UserOperationLog"})
-                .output("F:\\抖音视频\\code\\")
+                .entityClasses(new Class[]{User.class})
+                .modules(new String[]{"User"})
+                .output("F:\\代码集\\code\\")
                 .bindingMap(new LinkedHashMap<>())
                 .build()
                 .generate();
