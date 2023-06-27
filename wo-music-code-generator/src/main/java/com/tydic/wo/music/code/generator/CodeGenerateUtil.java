@@ -31,7 +31,6 @@ public class CodeGenerateUtil {
 
     public static void generate(CodeGenerator.CodeGeneratorInfo info) {
 
-
         for (int i = 0; i < info.getEntityClasses().length; i++) {
             LinkedHashMap<String, Object> bindingMap = info.getBindingMap();
             entityClass = info.getEntityClasses()[i];

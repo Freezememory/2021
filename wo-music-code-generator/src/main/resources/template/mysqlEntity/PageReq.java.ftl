@@ -7,10 +7,7 @@ import lombok.ToString;
 
 
 /**
-* <p>
-    * ${comment} 分页查询条件
-    * </p>
-*
+* ${comment} 分页查询条件
 * @author ${author}
 * @since ${time}
 */

@@ -3,10 +3,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
-* <p>
-    * ${comment} Mapper 接口
-    * </p>
-*
+* ${comment} Mapper 接口
 * @author ${author}
 * @since ${time}
 */

@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
-* <p>
-    * ${comment} controller层
-    * </p>
-*
+* ${comment} controller层
 * @author ${author}
 * @since ${time}
 */

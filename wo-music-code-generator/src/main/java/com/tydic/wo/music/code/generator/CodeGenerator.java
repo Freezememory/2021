@@ -16,13 +16,12 @@ public class CodeGenerator {
                 .author("Wanglj")
                 .service("业务")
                 .templatePath(mysqlEntityPath)
-                .entityClasses(new Class[]{User.class})
-                .modules(new String[]{"User"})
+                .entityClasses(new Class[]{MembershipLevel.class, UserGroup.class})
+                .modules(new String[]{"MembershipLevel", "UserGroup"})
                 .output("F:\\代码集\\code\\")
                 .bindingMap(new LinkedHashMap<>())
                 .build()
                 .generate();
-
     }
 
     @Slf4j
